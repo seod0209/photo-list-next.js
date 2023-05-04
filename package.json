@@ -1,0 +1,27 @@
+{
+    "name": "nextjs-ssr",
+    "private": true,
+    "workspaces": [
+        "./auth",
+        "./container",
+        "./list"
+    ],
+    "version": "0.0.0",
+    "scripts": {
+        "start": "concurrently \"cd auth; npm run dev\" \"cd container; npm run dev\" \"cd list; npm run dev\"",
+        "build": "concurrently \"cd auth; npm run build\" \"cd container; npm run build\" \"cd list; npm run build\"",
+        "serve": "concurrently \"cd auth; npm run start\" \"cd container; npm run start\" \"cd list; npm run start\"",
+        "e2e:ci": "yarn start & wait-on http-get://localhost:3001/ && npx cypress run --config-file ../cypress/config/cypress.config.ts --config '{\"supportFile\": \"../cypress/support/e2e.ts\"}' --spec \"./e2e/*.cy.ts\" --browser=chrome"
+    },
+    "dependencies": {
+        "concurrently": "^7.0.0",
+        "webpack": "^5.82.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.8",
+        "@babel/plugin-proposal-class-properties": "^7.18.6",
+        "@babel/preset-env": "^7.21.5",
+        "@babel/preset-react": "^7.18.6",
+        "babel-loader": "^9.1.2"
+    }
+}

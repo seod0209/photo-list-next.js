@@ -19,7 +19,13 @@ module.exports = {
                     exposes: {
                         // 이 곳에 외부에서 가져와 사용할 파일 명을 입력해준다.
                     },
-                    shared: {},
+                    shared: {
+                        react: {
+                            eager: true,
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                    },
                 })
             );
         }
